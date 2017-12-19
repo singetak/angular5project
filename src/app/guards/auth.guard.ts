@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
         return false;
     }
     private legitUser(user): boolean{
-      if(user.hasOwnProperty('uid') && user.hasOwnProperty('token')){
+      if(user.hasOwnProperty('uid') && user.hasOwnProperty('type') && user.hasOwnProperty('token')){
         return true;
       }else{
         return false;

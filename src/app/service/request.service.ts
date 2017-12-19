@@ -10,6 +10,7 @@ import { ContentType } from './enums';
 export class RequestService {
   private authURL = 'http://localhost:8080/v1/';
   private token = '';
+  private userType = 'default';
   public currentUserSubject: BehaviorSubject<any | undefined> = new BehaviorSubject<any | undefined>(undefined);
   public _currentUser: any | undefined = undefined;
   set currentUser(currentUser: any | undefined){
@@ -17,16 +18,32 @@ export class RequestService {
       this._currentUser = currentUser;
       this.currentUserSubject.next(this._currentUser);
       this.token = currentUser.token || '';
+      this.userType = currentUser.type || 'default';
     }else{
       this._currentUser = undefined;
       this.currentUserSubject.next(this._currentUser);
       this.token = '';
+      this.userType = 'default';
     }
   }
   get currentUser(): any | undefined {
     return this._currentUser;
   }
   constructor(private http: Http) {
+  }
+  public validUser(){
+    if(this.userType === 'admin'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public getUserId(){
+    if(this.currentUser && this.currentUser.hasOwnProperty('uid')){
+      return this.currentUser['uid'];
+    }else{
+      return '';
+    }
   }
   public setToken(token){
     this.token = token;
@@ -68,7 +85,7 @@ export class RequestService {
 
 
   }
-  public getArticlesList(term: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+  public getArticlesList(conf: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'article/search/summary';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
@@ -81,7 +98,7 @@ export class RequestService {
         } else {
             callback(undefined, error);
         }
-    }, RequestMethod.Post, {term: term});
+    }, RequestMethod.Post, conf);
   }
   public getArticle(articleId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'article/' + articleId;
@@ -113,6 +130,21 @@ export class RequestService {
         }
     }, RequestMethod.Post, article);
   }
+  public editArticle(articleId: string, article: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'article/' + articleId;
+    urlStr = this.addLanguageToURL(urlStr, lang);
+    this.jsonRequest(urlStr, (jsonObj, error) => {
+        if (error !== undefined){
+            callback(undefined, error);
+            return;
+        }
+        if (jsonObj) {
+          callback(jsonObj, undefined);
+        } else {
+            callback(undefined, error);
+        }
+    }, RequestMethod.Post, article);
+  }
   public deleteArticle(articleId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'article/' + articleId + '/delete';
     urlStr = this.addLanguageToURL(urlStr, lang);
@@ -128,7 +160,7 @@ export class RequestService {
         }
     }, RequestMethod.Post);
   }
-  public getUsersList(term: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+  public getUsersList(conf: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'user/search/summary';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
@@ -141,7 +173,7 @@ export class RequestService {
         } else {
             callback(undefined, error);
         }
-    }, RequestMethod.Post, {term: term});
+    }, RequestMethod.Post, conf);
   }
   public getUser(userId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'user/' + userId;
@@ -160,6 +192,21 @@ export class RequestService {
   }
   public createUser(user: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'user';
+    urlStr = this.addLanguageToURL(urlStr, lang);
+    this.jsonRequest(urlStr, (jsonObj, error) => {
+        if (error !== undefined){
+            callback(undefined, error);
+            return;
+        }
+        if (jsonObj) {
+          callback(jsonObj, undefined);
+        } else {
+            callback(undefined, error);
+        }
+    }, RequestMethod.Post, user);
+  }
+  public editUser(userId: any, user: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'user/' + userId;
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
         if (error !== undefined){
@@ -229,7 +276,7 @@ export class RequestService {
       if ( urlString ) {
         let url: string = urlString || '';
         // this.logger.log(url, method, postBody, contentType, timeout, retry, retryFactor, maxTimeout);
-        console.log(url, method, postBody, contentType, timeout, retry, retryFactor, maxTimeout);
+        // console.log(url, method, postBody, contentType, timeout, retry, retryFactor, maxTimeout);
         let headers = new Headers();
         if (this.token && urlString.startsWith(this.authURL)) {
           headers.append('Content-Type', contentType );

@@ -4,7 +4,7 @@ import { RequestService, AlertService } from '../../service';
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.html',
-  // styleUrls: ['./app.component.css']
+  styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent {
   private title = 'Dashboard';
@@ -12,8 +12,10 @@ export class DashboardComponent {
   private selectedArticle: string | undefined = undefined;
   private selectedUser: string | undefined = undefined;
   private articlesList: any[] = <any>[];
+  private userArticlesList: any[] = <any>[];
   private usersList: any[] = <any>[];
   private articleloading: boolean = false;
+  private userArticleloading: boolean = false;
   private userloading: boolean = false;
   private openArticleModal: boolean = false;
   private openUserModal: boolean = false;
@@ -22,11 +24,12 @@ export class DashboardComponent {
   }
   ngOnInit() {
     this.loadArticlesData();
+    this.loadUserArticlesData();
     this.loadUsersData();
   }
   private loadArticlesData(){
     this.articleloading = true;
-    this.requestService.getArticlesList('', (data, error) => {
+    this.requestService.getArticlesList({term: ''}, (data, error) => {
       if(error){
         console.log(error);
       }
@@ -38,9 +41,23 @@ export class DashboardComponent {
       this.articleloading = false;
     });
   }
+  private loadUserArticlesData(){
+    this.userArticleloading = true;
+    this.requestService.getArticlesList({filter: {user_id: this.requestService.getUserId()}}, (data, error) => {
+      if(error){
+        console.log(error);
+      }
+      if(data){
+        this.userArticlesList = data.data;
+      }else{
+        this.userArticlesList = <any>[];
+      }
+      this.userArticleloading = false;
+    });
+  }
   private loadUsersData(){
     this.userloading = true;
-    this.requestService.getUsersList('', (data, error) => {
+    this.requestService.getUsersList({term: ''}, (data, error) => {
       if(error){
         console.log(error);
       }
