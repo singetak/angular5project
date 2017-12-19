@@ -10,8 +10,8 @@
                         <div class="modal-body" *ngIf="dataUser">
                           <form>
                             <div class="form-group">
-                              <label for="InputTitle">Title</label>
-                              <input type="text" class="form-control" [disabled]="disabled" id="InputTitle" placeholder="Title" [value]="dataUser.name">
+                              <label for="InputTitle">Name</label>
+                              <input type="text" class="form-control" [disabled]="disabled" id="InputTitle" placeholder="Name" [value]="dataUser.name">
                             </div>
                             <div class="form-group">
                               <label for="InputEmail">Email</label>
@@ -23,11 +23,36 @@
                             </div>
                             </form>
                         </div>
+                        <div class="modal-body" *ngIf="newDataUser">
+                          <form>
+                            <div class="form-group">
+                              <label for="InputTitle">First Name</label>
+                              <input type="text" class="form-control" [disabled]="disabled" id="InputTitle" placeholder="First Name" [value]="newDataUser.firstName" (change)="editData('firstName', $event.target.value)" (input)="editData('firstName', $event.target.value)">
+                            </div>
+                            <div class="form-group">
+                              <label for="InputTitle">Last Name</label>
+                              <input type="text" class="form-control" [disabled]="disabled" id="InputTitle" placeholder="Last Name" [value]="newDataUser.lastName" (change)="editData('lastName', $event.target.value)" (input)="editData('lastName', $event.target.value)">
+                            </div>
+                            <div class="form-group">
+                              <label for="InputEmail">Email</label>
+                              <input type="text" class="form-control" [disabled]="disabled" id="InputEmail" placeholder="Email" [value]="newDataUser.email" (change)="editData('email', $event.target.value)" (input)="editData('email', $event.target.value)">
+                            </div>
+                            <div class="form-group">
+                              <label for="InputPN">Phone Number</label>
+                              <input type="text" class="form-control" [disabled]="disabled" id="InputPN" placeholder="Phone Number" [value]="newDataUser.phoneNumber" (change)="editData('phoneNumber', $event.target.value)" (input)="editData('phoneNumber', $event.target.value)">
+                            </div>
+                            <div class="form-group">
+                              <label for="InputPN">Password</label>
+                              <input type="password" class="form-control" [disabled]="disabled" id="InputPN" placeholder="Password" [value]="newDataUser.password" (change)="editData('password', $event.target.value)" (input)="editData('password', $event.target.value)">
+                            </div>
+                            </form>
+                        </div>
                         <div class="modal-footer">
                                 <div class="col-md-12">
                                         <div class="form-group row" style="text-align:center">
-                                                <!-- <button class="btn btn-primary confirm-btn" (click)="saveData()">Save</button> -->
-                                                <button class="btn btn-primary confirm-btn" (click)="onSelectClose()">Cancel</button><img *ngIf="loading" class="loader" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                                <button class="btn btn-primary confirm-btn" (click)="onSelectClose()">Cancel</button>
+                                                <button class="btn btn-primary confirm-btn onSaveBtn" *ngIf="newDataUser" (click)="onSave()">Save</button>
+                                                <img *ngIf="loading" class="loader" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                         </div>
                                 </div>
                         </div>

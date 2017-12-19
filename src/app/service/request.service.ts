@@ -98,6 +98,36 @@ export class RequestService {
         }
     });
   }
+  public createArticle(article: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'article';
+    urlStr = this.addLanguageToURL(urlStr, lang);
+    this.jsonRequest(urlStr, (jsonObj, error) => {
+        if (error !== undefined){
+            callback(undefined, error);
+            return;
+        }
+        if (jsonObj) {
+          callback(jsonObj, undefined);
+        } else {
+            callback(undefined, error);
+        }
+    }, RequestMethod.Post, article);
+  }
+  public deleteArticle(articleId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'article/' + articleId + '/delete';
+    urlStr = this.addLanguageToURL(urlStr, lang);
+    this.jsonRequest(urlStr, (jsonObj, error) => {
+        if (error !== undefined){
+            callback(undefined, error);
+            return;
+        }
+        if (jsonObj) {
+          callback(jsonObj, undefined);
+        } else {
+            callback(undefined, error);
+        }
+    }, RequestMethod.Post);
+  }
   public getUsersList(term: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'user/search/summary';
     urlStr = this.addLanguageToURL(urlStr, lang);
@@ -113,8 +143,8 @@ export class RequestService {
         }
     }, RequestMethod.Post, {term: term});
   }
-  public getUser(articleId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
-    let urlStr = this.authURL + 'user/' + articleId;
+  public getUser(userId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'user/' + userId;
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonGetRequest(urlStr, (jsonObj, error) => {
         if (error !== undefined){
@@ -127,6 +157,36 @@ export class RequestService {
             callback(undefined, error);
         }
     });
+  }
+  public createUser(user: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'user';
+    urlStr = this.addLanguageToURL(urlStr, lang);
+    this.jsonRequest(urlStr, (jsonObj, error) => {
+        if (error !== undefined){
+            callback(undefined, error);
+            return;
+        }
+        if (jsonObj) {
+          callback(jsonObj, undefined);
+        } else {
+            callback(undefined, error);
+        }
+    }, RequestMethod.Post, user);
+  }
+  public deleteUser(userId: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = this.authURL + 'user/' + userId + '/delete';
+    urlStr = this.addLanguageToURL(urlStr, lang);
+    this.jsonRequest(urlStr, (jsonObj, error) => {
+        if (error !== undefined){
+            callback(undefined, error);
+            return;
+        }
+        if (jsonObj) {
+          callback(jsonObj, undefined);
+        } else {
+            callback(undefined, error);
+        }
+    }, RequestMethod.Post);
   }
   private urlEncode(str: string): string {
       return encodeURI(str);

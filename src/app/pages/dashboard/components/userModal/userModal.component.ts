@@ -14,14 +14,20 @@ export class UserModal {
   public _statusOpen: boolean = false;
   public loading: boolean = false;
   public disabled: boolean = true;
-  public dataUser: any | undefined;
+  public newDataUser: any = undefined ;
+  public dataUser: any;
   @Input() selectedUser: string | undefined;
   @Input()
   set statusOpen(data: boolean) {
     this._statusOpen = data;
     if(data){
-      this.loadData();
       this.show();
+      if(this.selectedUser){
+        this.loadData();
+      }else{
+        this.newDataUser = {firstName: '', lastName: '', email: '', phoneNumber: '', password: ''}
+        this.disabled = false;
+      }
     }
   }
   get statusOpen(): boolean { return this._statusOpen; }
@@ -38,6 +44,9 @@ export class UserModal {
   }
   hide() {
     this.loading = false;
+    this.newDataUser = undefined;
+    this.dataUser = undefined;
+    this.disabled = true;
     this._modal.hide();
   }
   onSelectClose(event): void {
@@ -58,20 +67,20 @@ export class UserModal {
       this.loading = false;
     })
   }
-  saveData(){
+  editData(attribute, value){
+    this.newDataUser[attribute] = value;
+  }
+  onSave(){
     this.loading = true;
-
-    // this.request.getProcedureInstanceUpdate(this.selectedProcedure.uid, newProcedure)
-    //   .subscribe(
-    //       (data) => {
-    //         if(data){
-    //             this.alertService.success('Update successful','modal', true);
-    //             this.onSelectClose(true);
-    //         }else{
-    //             this.alertService.error('Update unsuccessful','modal');
-    //             this.onSelectClose(true);
-    //         }
-    //       }
-    //     );
+    this.requestService.createUser(this.newDataUser, (data, error) => {
+      if(error){
+        console.log(error);
+      }
+      if(data){
+        console.log(data);
+        this.onSelectClose(data);
+      }
+      this.loading = false;
+    });
   }
 }

@@ -36,7 +36,7 @@ export class DashboardComponent {
         this.articlesList = <any>[];
       }
       this.articleloading = false;
-    })
+    });
   }
   private loadUsersData(){
     this.userloading = true;
@@ -50,10 +50,9 @@ export class DashboardComponent {
         this.usersList = <any>[];
       }
       this.userloading = false;
-    })
+    });
   }
   private addData(type){
-    console.log('addData', type);
     if(type === 'article'){
       this.selectedArticle = undefined;
       this.openArticleModal = true;
@@ -62,7 +61,32 @@ export class DashboardComponent {
       this.openUserModal = true;
     }
   }
-
+  private deleteUser(userId){
+    this.userloading = true;
+    this.requestService.deleteUser(userId, (data, error) => {
+      if(error){
+        console.log(error);
+      }
+      if(data){
+        this.loadUsersData();
+      }else{
+        this.userloading = false;
+      }
+    });
+  }
+  private deleteArticle(articleId){
+    this.articleloading = true;
+    this.requestService.deleteArticle(articleId, (data, error) => {
+      if(error){
+        console.log(error);
+      }
+      if(data){
+        this.loadArticlesData();
+      }else{
+        this.articleloading = false;
+      }
+    })
+  }
   private openData(type, dataId){
     if(type === 'article'){
       this.selectedArticle = dataId;

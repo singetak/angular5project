@@ -14,14 +14,20 @@ export class ArticleModal {
   public _statusOpen: boolean = false;
   public loading: boolean = false;
   public disabled: boolean = true;
-  public dataArticle: any | undefined;
+  public newDataArticle: any = undefined;
+  public dataArticle: any;
   @Input() selectedArticle: string | undefined;
   @Input()
   set statusOpen(data: boolean) {
     this._statusOpen = data;
     if(data){
-      this.loadData();
       this.show();
+      if(this.selectedArticle){
+        this.loadData();
+      }else{
+        this.newDataArticle = {name: '', textBody: ''}
+        this.disabled = false;
+      }
     }
   }
   get statusOpen(): boolean { return this._statusOpen; }
@@ -38,6 +44,9 @@ export class ArticleModal {
   }
   hide() {
     this.loading = false;
+    this.newDataArticle = undefined;
+    this.dataArticle = undefined;
+    this.disabled = true;
     this._modal.hide();
   }
   onSelectClose(event): void {
@@ -56,22 +65,22 @@ export class ArticleModal {
         this.dataArticle = undefined;
       }
       this.loading = false;
-    })
+    });
   }
-  saveData(){
+  editData(attribute, value){
+    this.newDataArticle[attribute] = value;
+  }
+  onSave(){
     this.loading = true;
-
-    // this.request.getProcedureInstanceUpdate(this.selectedProcedure.uid, newProcedure)
-    //   .subscribe(
-    //       (data) => {
-    //         if(data){
-    //             this.alertService.success('Update successful','modal', true);
-    //             this.onSelectClose(true);
-    //         }else{
-    //             this.alertService.error('Update unsuccessful','modal');
-    //             this.onSelectClose(true);
-    //         }
-    //       }
-    //     );
+    this.requestService.createArticle(this.newDataArticle, (data, error) => {
+      if(error){
+        console.log(error);
+      }
+      if(data){
+        console.log(data);
+        this.onSelectClose(data);
+      }
+      this.loading = false;
+    });
   }
 }
