@@ -1,0 +1,58 @@
+.modal {
+  padding-top: 150px;
+
+  .modal-content {
+    color: rgba(134, 149, 164, 0.75);
+    border-radius: 2px;
+    border: none;
+
+    .modal-header {
+      // border: none;
+      color: rgba(134, 149, 164, 0.5);
+      > .modal-title {
+        font-weight: bold;
+      }
+    }
+
+    .modal-footer {
+      border: none;
+      text-align: center;
+    }
+
+    .close {
+      outline: none;
+      opacity: 1;
+      color: rgba(134, 149, 164, 0.5);
+      font-weight: bold;
+      &:hover {
+        color: rgba(3, 169, 244, 0.75);
+      }
+    }
+    .btn{
+      cursor: pointer;
+    }
+    .loader{
+      width:20px;
+      height:20px;
+    }
+  }
+}
+.fade.in {
+  opacity: 1;
+  background-color: rgba(0,0,0,0.3);
+}
+.modal-buttons .btn {
+  margin-right: 20px;
+}
+
+.modal-backdrop.in {
+  opacity: 0;
+  pointer-events: none;
+}
+.form-control-color{
+  height:35px;
+  width:40px;
+}
+.input-group-color{
+  width:100%;
+}
