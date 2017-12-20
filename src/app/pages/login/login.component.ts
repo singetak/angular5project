@@ -10,12 +10,12 @@ import { urlSafeBase64Encoding } from '../../helpers';
 })
 export class LoginComponent {
   private subscriptions: any[] = <any>[];
-  private title = 'Login Page';
-  private errorMessage: string = '';
-  private loginPassword: string = '123456';
-  private emailPassword: string = 'admin@store.com';
-  private saveUsername: boolean = true;
-  private loading: boolean = false;
+  public title = 'Login Page';
+  public errorMessage: string = '';
+  public loginPassword: string = '123456';
+  public emailPassword: string = 'admin@store.com';
+  public saveUsername: boolean = true;
+  public loading: boolean = false;
   constructor(private router: Router, private requestService: RequestService){
     localStorage.removeItem('currentUser');
     this.requestService.setToken('');
@@ -23,7 +23,7 @@ export class LoginComponent {
   ngOnInit() {
 
   }
-  private login(){
+  public login(){
     this.loading = true;
     this.errorMessage = '';
     let encodedPassword = urlSafeBase64Encoding(this.loginPassword);

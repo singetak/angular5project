@@ -38,7 +38,7 @@ export class UserModal {
   //Export variable to parent
   @Output() onClose : EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('userModal') _modal: ModalDirective;
-  constructor(private alertService: AlertService, private requestService: RequestService) {
+  constructor(private alertService: AlertService, public requestService: RequestService) {
   }
   ngOnInit() {
 

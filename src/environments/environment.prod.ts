@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serverURL: 'http://infoiuse.com/api/v1/'
 };

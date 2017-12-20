@@ -4,11 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 import 'rxjs/Rx';
+import { environment } from '../../environments/environment';
 import { Dictionary } from '../interface';
 import { ContentType } from './enums';
 @Injectable()
 export class RequestService {
-  private authURL = 'http://localhost:8080/v1/';
+  private authURL = environment.serverURL;
   private token = '';
   private userType = 'default';
   public currentUserSubject: BehaviorSubject<any | undefined> = new BehaviorSubject<any | undefined>(undefined);

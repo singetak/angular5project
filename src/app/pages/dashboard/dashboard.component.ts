@@ -7,19 +7,19 @@ import { RequestService, AlertService } from '../../service';
   styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent {
-  private title = 'Dashboard';
-  private message = '';
-  private selectedArticle: string | undefined = undefined;
-  private selectedUser: string | undefined = undefined;
-  private articlesList: any[] = <any>[];
-  private userArticlesList: any[] = <any>[];
-  private usersList: any[] = <any>[];
-  private articleloading: boolean = false;
-  private userArticleloading: boolean = false;
-  private userloading: boolean = false;
-  private openArticleModal: boolean = false;
-  private openUserModal: boolean = false;
-  constructor(private requestService: RequestService, private alertService: AlertService){
+  public title = 'Dashboard';
+  public message = '';
+  public selectedArticle: string | undefined = undefined;
+  public selectedUser: string | undefined = undefined;
+  public articlesList: any[] = <any>[];
+  public userArticlesList: any[] = <any>[];
+  public usersList: any[] = <any>[];
+  public articleloading: boolean = false;
+  public userArticleloading: boolean = false;
+  public userloading: boolean = false;
+  public openArticleModal: boolean = false;
+  public openUserModal: boolean = false;
+  constructor(public requestService: RequestService, private alertService: AlertService){
 
   }
   ngOnInit() {
@@ -69,7 +69,7 @@ export class DashboardComponent {
       this.userloading = false;
     });
   }
-  private addData(type){
+  public addData(type){
     if(type === 'article'){
       this.selectedArticle = undefined;
       this.openArticleModal = true;
@@ -78,7 +78,7 @@ export class DashboardComponent {
       this.openUserModal = true;
     }
   }
-  private deleteUser(userId){
+  public deleteUser(userId){
     this.userloading = true;
     this.requestService.deleteUser(userId, (data, error) => {
       if(error){
@@ -91,7 +91,7 @@ export class DashboardComponent {
       }
     });
   }
-  private deleteArticle(articleId){
+  public deleteArticle(articleId){
     this.articleloading = true;
     this.requestService.deleteArticle(articleId, (data, error) => {
       if(error){
@@ -104,7 +104,7 @@ export class DashboardComponent {
       }
     })
   }
-  private openData(type, dataId){
+  public openData(type, dataId){
     if(type === 'article'){
       this.selectedArticle = dataId;
       this.openArticleModal = true;
@@ -113,7 +113,7 @@ export class DashboardComponent {
       this.openUserModal = true;
     }
   }
-  private closeModal(event){
+  public closeModal(event){
     if(event === true){
       this.openArticleModal = false;
       this.openUserModal = false;
