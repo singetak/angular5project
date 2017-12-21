@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestMethod, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/Rx';
-import 'rxjs/add/observable/of';
-import 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../environments/environment';
 import { Dictionary } from '../interface';
 import { ContentType } from './enums';
