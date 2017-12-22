@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  serverURL: 'http://localhost:8080/v1/'
+  serverURL: 'http://infoiuse.com/api/v1/'
 };

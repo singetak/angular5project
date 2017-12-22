@@ -1,4 +1,4 @@
-import {Component,Input,EventEmitter,Output,ViewChild} from '@angular/core';
+import {Component, Input, EventEmitter, Output, ViewChild} from '@angular/core';
 
 import { Router } from '@angular/router';
 import { urlSafeBase64Encoding } from '../../../../helpers';
@@ -24,19 +24,19 @@ export class UserModal {
   @Input()
   set statusOpen(data: boolean) {
     this._statusOpen = data;
-    if(data){
+    if (data) {
       this.show();
-      if(this.selectedUser){
+      if (this.selectedUser) {
         this.loadData();
-      }else{
-        this.newDataUser = { first_name: '', last_name: '', email: '', phone_number: '', type: 'default', password: '' }
+      }else {
+        this.newDataUser = { first_name: '', last_name: '', email: '', phone_number: '', type: 'default', password: '' };
         this.disabled = false;
       }
     }
   }
   get statusOpen(): boolean { return this._statusOpen; }
-  //Export variable to parent
-  @Output() onClose : EventEmitter<any> = new EventEmitter<any>();
+  // Export variable to parent
+  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('userModal') _modal: ModalDirective;
   constructor(private alertService: AlertService, public requestService: RequestService) {
   }
@@ -58,37 +58,38 @@ export class UserModal {
     this.hide();
     this.onClose.emit(true);
   }
-  loadData(){
+  loadData() {
     this.loading = true;
     this.requestService.getUser(this.selectedUser, (data, error) => {
-      if(error){
+      if (error) {
         console.log(error);
         this.message = error.message;
       }
-      if(data){
+      if (data) {
         this.dataUser = data.data;
-      }else{
+      } else {
         this.dataUser = undefined;
       }
       this.loading = false;
-    })
+    });
   }
-  editOldData(attribute, value){
+  editOldData(attribute, value) {
     this.dataUser[attribute] = value;
   }
-  editData(){
-    if(this.disabled){
+  editData() {
+    if (this.disabled) {
       this.disabled = false;
       this.message = '';
-    }else{
+    }else {
       this.loading = true;
-      let newUpdateUser = {uid: this.dataUser.uid, first_name: this.dataUser.first_name, last_name: this.dataUser.last_name, email: this.dataUser.email, phone_number: this.dataUser.phone_number};
+      let newUpdateUser = {uid: this.dataUser.uid, first_name: this.dataUser.first_name, last_name:
+         this.dataUser.last_name, email: this.dataUser.email, phone_number: this.dataUser.phone_number};
       this.requestService.editUser(newUpdateUser.uid, newUpdateUser, (data, error) => {
-        if(error){
+        if (error) {
           console.log(error);
           this.message = error.message;
         }
-        if(data){
+        if (data) {
           this.message = data.message;
           this.disabled = true;
         }
@@ -96,19 +97,19 @@ export class UserModal {
       });
     }
   }
-  editNewData(attribute, value){
+  editNewData(attribute, value) {
     this.newDataUser[attribute] = value;
   }
-  onSave(){
+  onSave() {
     this.loading = true;
     let newUser = Object.assign({}, this.newDataUser);
     newUser['password'] = urlSafeBase64Encoding(newUser.password);
     this.requestService.createUser(newUser, (data, error) => {
-      if(error){
+      if (error) {
         console.log(error);
         this.message = error.message;
       }
-      if(data){
+      if (data) {
         this.message = data.message;
         this.onSelectClose(data);
       }

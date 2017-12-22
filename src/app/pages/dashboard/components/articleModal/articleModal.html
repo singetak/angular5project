@@ -3,6 +3,7 @@
                 <div class="modal-content">
                         <div class="modal-header">
                                 <h4 class="modal-title" *ngIf="dataArticle">Article - {{dataArticle.name}}</h4>
+                                <h4 class="modal-title" *ngIf="!dataArticle">New Article</h4>
                                 <button class="close" (click)="onSelectClose($event)" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                 </button>

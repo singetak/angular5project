@@ -13,12 +13,12 @@ export class RequestService {
   public currentUserSubject: BehaviorSubject<any | undefined> = new BehaviorSubject<any | undefined>(undefined);
   public _currentUser: any | undefined = undefined;
   set currentUser(currentUser: any | undefined){
-    if(currentUser){
+    if (currentUser) {
       this._currentUser = currentUser;
       this.currentUserSubject.next(this._currentUser);
       this.token = currentUser.token || '';
       this.userType = currentUser.type || 'default';
-    }else{
+    } else {
       this._currentUser = undefined;
       this.currentUserSubject.next(this._currentUser);
       this.token = '';
@@ -30,51 +30,52 @@ export class RequestService {
   }
   constructor(private http: Http) {
   }
-  public validUser(){
-    if(this.userType === 'admin'){
+  public validUser() {
+    if (this.userType === 'admin') {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
-  public getUserId(){
-    if(this.currentUser && this.currentUser.hasOwnProperty('uid')){
+  public getUserId() {
+    if (this.currentUser && this.currentUser.hasOwnProperty('uid')) {
       return this.currentUser['uid'];
-    }else{
+    }else {
       return '';
     }
   }
-  public setToken(token){
+  public setToken(token) {
     this.token = token;
   }
   public addLanguageToURL(url: string, lang?: string): string {
-    if (url){
+    if (url) {
       let langEnd = lang;
       if (langEnd === undefined) {
           langEnd = 'en';
       }
-      if (~url.indexOf('?')){
+      if (~url.indexOf('?')) {
         url += '&locale=' + langEnd;
-      }else{
+      }else {
         url += '?locale=' + langEnd;
       }
       return url;
-    } else{
+    } else {
       return '';
     }
   }
-  public requestLogin(username: string, password: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+  public requestLogin(username: string, password: string, callback: (dataResponse: any | undefined,
+    requestError: any | undefined) => void, lang?: string) {
       let urlStr = this.authURL + 'user/login?username=' + username + '&password=' + password ;
       urlStr = this.addLanguageToURL(urlStr, lang);
       this.jsonGetRequest(urlStr, (jsonObj, error) => {
-          if (error !== undefined){
+          if (error !== undefined) {
               callback(undefined, error);
               return;
           }
           if (jsonObj) {
-            if(jsonObj.status){
+            if (jsonObj.status) {
               callback(jsonObj.data, undefined);
-            }else{
+            }else {
               callback(undefined, jsonObj.message);
             }
           } else {
@@ -88,7 +89,7 @@ export class RequestService {
     let urlStr = this.authURL + 'article/search/summary';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -103,7 +104,7 @@ export class RequestService {
     let urlStr = this.authURL + 'article/' + articleId;
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonGetRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -118,7 +119,7 @@ export class RequestService {
     let urlStr = this.authURL + 'article';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -129,11 +130,12 @@ export class RequestService {
         }
     }, RequestMethod.Post, article);
   }
-  public editArticle(articleId: string, article: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+  public editArticle(articleId: string, article: any, callback: (dataResponse: any | undefined,
+    requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'article/' + articleId;
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -148,7 +150,7 @@ export class RequestService {
     let urlStr = this.authURL + 'article/' + articleId + '/delete';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -163,7 +165,7 @@ export class RequestService {
     let urlStr = this.authURL + 'user/search/summary';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -178,7 +180,7 @@ export class RequestService {
     let urlStr = this.authURL + 'user/' + userId;
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonGetRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -193,7 +195,7 @@ export class RequestService {
     let urlStr = this.authURL + 'user';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -208,7 +210,7 @@ export class RequestService {
     let urlStr = this.authURL + 'user/' + userId;
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -223,7 +225,7 @@ export class RequestService {
     let urlStr = this.authURL + 'user/' + userId + '/delete';
     urlStr = this.addLanguageToURL(urlStr, lang);
     this.jsonRequest(urlStr, (jsonObj, error) => {
-        if (error !== undefined){
+        if (error !== undefined) {
             callback(undefined, error);
             return;
         }
@@ -239,7 +241,7 @@ export class RequestService {
   }
   private jsonRequestSimple(urlString: string, callback: (json?: any, error?: any) => void, params: Dictionary, timeout: number = 60.0) {
     let body ;
-    if (params){
+    if (params) {
       body = params;
     } else {
       // we need to recheck this
@@ -250,9 +252,9 @@ export class RequestService {
     }, RequestMethod.Post, body, ContentType.JSON, timeout);
   }
   private jsonGetRequest(urlString: string, callback: (json?: any, error?: any) => void, params?: Dictionary) {
-      if (urlString){
+      if (urlString) {
         let urlComps = urlString;
-        if (params){
+        if (params) {
           for (let urlItem of Object.keys(params)) {
             urlComps += '&' + urlItem + '=' + params[urlItem];
           }
@@ -270,8 +272,7 @@ export class RequestService {
                       timeout: number = 10.0,
                       retry: boolean = false,
                       retryFactor: number = 1.5,
-                      maxTimeout: number = 60.0)
-  {
+                      maxTimeout: number = 60.0) {
       if ( urlString ) {
         let url: string = urlString || '';
         // this.logger.log(url, method, postBody, contentType, timeout, retry, retryFactor, maxTimeout);
@@ -284,7 +285,7 @@ export class RequestService {
         }
         let options = new RequestOptions({ headers: headers });
         let bodyString = postBody;
-        if (method === RequestMethod.Post){
+        if (method === RequestMethod.Post) {
            bodyString = JSON.stringify(postBody);
            options.body = bodyString;
         }
@@ -305,9 +306,9 @@ export class RequestService {
                             (err) => {
                               if (retry) {
                                   let timeInterval = Math.min(maxTimeout, retryFactor * timeout);
-                                  this.jsonRequest(urlString, callback, method, postBody, contentType, timeInterval, true, retryFactor, maxTimeout );
-                              }
-                              else {
+                                  this.jsonRequest(urlString, callback, method, postBody, contentType, timeInterval,
+                                     true, retryFactor, maxTimeout );
+                              } else {
                                   callback(undefined, err);
                               }
                             });

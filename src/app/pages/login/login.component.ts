@@ -16,30 +16,30 @@ export class LoginComponent {
   public emailPassword: string = 'admin@store.com';
   public saveUsername: boolean = true;
   public loading: boolean = false;
-  constructor(private router: Router, private requestService: RequestService){
+  constructor(private router: Router, private requestService: RequestService) {
     localStorage.removeItem('currentUser');
     this.requestService.setToken('');
   }
   ngOnInit() {
 
   }
-  public login(){
+  public login() {
     this.loading = true;
     this.errorMessage = '';
     let encodedPassword = urlSafeBase64Encoding(this.loginPassword);
     this.requestService.requestLogin(this.emailPassword, encodedPassword, (data, error) => {
-      if(error){
+      if (error) {
         this.errorMessage = error;
       }
-      if(data){
+      if (data) {
         localStorage.setItem('currentUser', JSON.stringify(data));
         this.requestService.currentUser = data;
         this.router.navigate(['/']);
-      }else{
+      }else {
         localStorage.removeItem('currentUser');
         this.requestService.currentUser = undefined;
       }
       this.loading = false;
-    })
+    });
   }
 }

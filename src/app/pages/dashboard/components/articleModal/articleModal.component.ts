@@ -1,4 +1,4 @@
-import {Component,Input,EventEmitter,Output,ViewChild} from '@angular/core';
+import {Component, Input, EventEmitter, Output, ViewChild} from '@angular/core';
 
 import { Router } from '@angular/router';
 import { AlertService, RequestService } from '../../../../service';
@@ -22,19 +22,19 @@ export class ArticleModal {
   @Input()
   set statusOpen(data: boolean) {
     this._statusOpen = data;
-    if(data){
+    if (data) {
       this.show();
-      if(this.selectedArticle){
+      if (this.selectedArticle) {
         this.loadData();
-      }else{
-        this.newDataArticle = {name: '', textBody: ''}
+      }else {
+        this.newDataArticle = {name: '', textBody: ''};
         this.disabled = false;
       }
     }
   }
   get statusOpen(): boolean { return this._statusOpen; }
-  //Export variable to parent
-  @Output() onClose : EventEmitter<any> = new EventEmitter<any>();
+  // Export variable to parent
+  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('articleModal') _modal: ModalDirective;
   constructor(private alertService: AlertService, private requestService: RequestService) {
   }
@@ -56,36 +56,36 @@ export class ArticleModal {
     this.hide();
     this.onClose.emit(true);
   }
-  loadData(){
+  loadData() {
     this.loading = true;
     this.requestService.getArticle(this.selectedArticle, (data, error) => {
-      if(error){
+      if (error) {
         console.log(error);
         this.message = error.message;
       }
-      if(data){
+      if (data) {
         this.dataArticle = data.data;
-      }else{
+      }else {
         this.dataArticle = undefined;
       }
       this.loading = false;
     });
   }
-  editOldData(attribute, value){
+  editOldData(attribute, value) {
     this.dataArticle[attribute] = value;
   }
-  editData(){
-    if(this.disabled){
+  editData() {
+    if (this.disabled) {
       this.disabled = false;
       this.message = '';
-    }else{
+    } else {
       this.loading = true;
       let newUpdateArticle: models.Article = {uid: this.dataArticle.uid, name: this.dataArticle.name, textBody: this.dataArticle.textBody};
       this.requestService.editArticle(newUpdateArticle.uid, newUpdateArticle, (data, error) => {
-        if(error){
+        if (error) {
           this.message = error.message;
         }
-        if(data){
+        if (data) {
           this.message = data.message;
           this.disabled = true;
         }
@@ -93,17 +93,17 @@ export class ArticleModal {
       });
     }
   }
-  editNewData(attribute, value){
+  editNewData(attribute, value) {
     this.newDataArticle[attribute] = value;
   }
-  onSave(){
+  onSave() {
     this.loading = true;
     this.requestService.createArticle(this.newDataArticle, (data, error) => {
-      if(error){
+      if (error) {
         console.log(error);
         this.message = error.message;
       }
-      if(data){
+      if (data) {
         this.message = data.message;
         this.onSelectClose(data);
       }
