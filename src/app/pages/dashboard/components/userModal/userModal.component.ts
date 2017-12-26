@@ -1,9 +1,9 @@
 import {Component, Input, EventEmitter, Output, ViewChild} from '@angular/core';
 
 import { Router } from '@angular/router';
-import { urlSafeBase64Encoding } from '../../../../helpers';
-import { AlertService, RequestService } from '../../../../service/index';
-import * as models from '../../../../model/index';
+import { urlSafeBase64Encoding } from 'app/helpers';
+import { AlertService, RequestService } from 'app/service/index';
+import * as models from 'app/model/index';
 import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { RequestService } from '../service';
+import { RequestService } from 'app/service';
 @Component({
   selector: 'pages',
   encapsulation: ViewEncapsulation.None,

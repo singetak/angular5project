@@ -5,7 +5,7 @@ import { routing } from './pages.routing';
 import { AlertComponent } from '../directives/index';
 
 import { PagesComponent } from './pages.component';
-import { AlertService, RequestService } from '../service/index';
+import { AlertService, RequestService } from 'app/service/index';
 import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 import { ArticleModal } from './dashboard/components/articleModal';
 import { FiremsgComponent } from './dashboard/components/firemsg';

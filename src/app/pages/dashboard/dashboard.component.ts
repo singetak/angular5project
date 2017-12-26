@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RequestService, AlertService } from '../../service';
+import { RequestService, AlertService } from 'app/service';
 
 @Component({
   selector: 'dashboard',

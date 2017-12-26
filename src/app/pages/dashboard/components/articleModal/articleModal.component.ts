@@ -1,8 +1,8 @@
 import {Component, Input, EventEmitter, Output, ViewChild} from '@angular/core';
 
 import { Router } from '@angular/router';
-import { AlertService, RequestService } from '../../../../service';
-import * as models from '../../../../model/index';
+import { AlertService, RequestService } from 'app/service';
+import * as models from 'app/model/index';
 import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({

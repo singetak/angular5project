@@ -1,36 +1,79 @@
 @import '../../variables';
+
+/* Common*/
 alert {
   z-index: 9999;
   position: absolute;
 }
-.al-footer {
-  height: 34px;
-  padding: 0 18px 0 20px;
-  width: 100%;
-  display: block;
-  bottom: 0;
-  font-size: 13px;
-  color: $default-text;
-  transition: padding-left 0.5s ease;
+
+.clear{
+  clear: both;
 }
 
-.al-footer-main {
-  float: left;
-  margin-left: 15px;
+h1,h2,h3,h4,p,span{
+  color:$secondary-text;
 }
-.al-footer-right {
-  float: right;
-  margin-right: 12px;
-  i {
-    margin: 0 4px;
-    color: $danger;
-    font-size: 12px;
+
+/* End Common*/
+
+
+.container-fluid{
+  /* Header */
+  .head-top{
+    margin:10px 0px;
+    .infoIuse{
+      float: left;
+      height: 40px;
+    }
+    h2{
+      float: left;
+      font-weight: bold;
+      color:$default-text;
+      margin:0px 5px
+    }
+    .menu-top{
+      float:right;
+    }
+    .btn-primary{
+      background-color: $default-text;
+      border-color:$default-text;
+    }
+    .btn-primary:hover{
+      background-color: $default-text;
+      border-color:$default-text;
+    }
   }
-  a {
-    margin-left: 4px;
+
+  /* footer */
+  .al-footer {
+    height: 34px;
+    padding: 0 18px 0 20px;
+    width: 100%;
+    display: block;
+    bottom: 0;
+    font-size: 13px;
     color: $default-text;
-    &:hover {
+    transition: padding-left 0.5s ease;
+  }
+
+  .al-footer-main {
+    float: left;
+    margin-left: 15px;
+  }
+  .al-footer-right {
+    float: right;
+    margin-right: 12px;
+    i {
+      margin: 0 4px;
       color: $danger;
+      font-size: 12px;
+    }
+    a {
+      margin-left: 4px;
+      color: $default-text;
+      &:hover {
+        color: $danger;
+      }
     }
   }
 }

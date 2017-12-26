@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RequestService } from '../../service/request.service';
-import { urlSafeBase64Encoding } from '../../helpers';
+import { RequestService } from 'app/service/request.service';
+import { urlSafeBase64Encoding } from 'app/helpers';
 
 @Component({
   selector: 'login',
