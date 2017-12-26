@@ -19,6 +19,8 @@ export class DashboardComponent {
   public userloading: boolean = false;
   public openArticleModal: boolean = false;
   public openUserModal: boolean = false;
+  public fireMessages: any[] | undefined = undefined;
+  public fireloading: boolean = false;
   constructor(public requestService: RequestService, private alertService: AlertService) {
 
   }
@@ -26,6 +28,7 @@ export class DashboardComponent {
     this.loadArticlesData();
     this.loadUserArticlesData();
     this.loadUsersData();
+    this.loadFireMsgData();
   }
   private loadArticlesData() {
     this.articleloading = true;
@@ -118,5 +121,21 @@ export class DashboardComponent {
       this.openArticleModal = false;
       this.openUserModal = false;
     }
+  }
+
+  private loadFireMsgData() {
+    this.fireloading = true;
+    this.requestService.getFireMessagesList('', (data, error) => {
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        console.log(data);
+        this.fireMessages = data;
+      }else {
+        this.fireMessages = <any>[];
+      }
+      this.fireloading = false;
+    });
   }
 }

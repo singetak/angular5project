@@ -8,6 +8,7 @@ import { PagesComponent } from './pages.component';
 import { AlertService, RequestService } from '../service/index';
 import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 import { ArticleModal } from './dashboard/components/articleModal';
+import { FiremsgComponent } from './dashboard/components/firemsg';
 import { UserModal } from './dashboard/components/userModal';
 import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
@@ -23,6 +24,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
     AlertComponent,
     ArticleModal,
+    FiremsgComponent,
     UserModal
   ],
   providers: [

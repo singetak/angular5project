@@ -15,6 +15,11 @@
 </div>
 <div class="row">
   <div class="col">
+    <fire-message [selectedFireMsg]="fireMessages" ></fire-message>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
     <div class="card bg-light mb-3" style="max-width: 20rem;">
       <div class="card-header">Articles <i class="fa fa-plus-circle actionIcon" *ngIf="requestService.validUser()" aria-hidden="true" (click)="addData('article')"></i></div>
       <div class="card-body">

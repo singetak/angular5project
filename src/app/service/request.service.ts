@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestMethod, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../environments/environment';
 import { Dictionary } from '../interface';
@@ -28,7 +29,7 @@ export class RequestService {
   get currentUser(): any | undefined {
     return this._currentUser;
   }
-  constructor(private http: Http) {
+  constructor(private http: Http, private db: AngularFireDatabase) {
   }
   public validUser() {
     if (this.userType === 'admin') {
@@ -235,6 +236,23 @@ export class RequestService {
             callback(undefined, error);
         }
     }, RequestMethod.Post);
+  }
+  public getFireMessagesList(conf: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
+    let urlStr = '/msgitems';
+    this.db.list(urlStr).valueChanges().subscribe(
+      (messages) => {
+        if (messages) {
+            callback(messages, undefined);
+        } else {
+            callback(undefined, 'Error!');
+        }
+      }, (e) => {
+        callback(undefined, e);
+      }
+    );
+
+    // callback(undefined, error);
+
   }
   private urlEncode(str: string): string {
       return encodeURI(str);

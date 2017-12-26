@@ -9,7 +9,10 @@ import { AuthGuard } from './guards/index';
 import { LoginComponent } from './pages/login/login.component';
 import { NoContentComponent } from './pages/no-content';
 import { PagesModule } from './pages/pages.module';
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 // Application wide providers
 const APP_PROVIDERS = [
   RequestService,
@@ -26,7 +29,10 @@ const APP_PROVIDERS = [
     BrowserModule,
     HttpModule,
     routing,
-    PagesModule
+    PagesModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [APP_PROVIDERS],
   bootstrap: [AppComponent]
