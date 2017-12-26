@@ -29,7 +29,7 @@ export class RequestService {
   get currentUser(): any | undefined {
     return this._currentUser;
   }
-  constructor(private http: Http, private db: AngularFireDatabase) {
+  constructor(private http: Http, private firebaseDB: AngularFireDatabase) {
   }
   public validUser() {
     if (this.userType === 'admin') {
@@ -83,8 +83,6 @@ export class RequestService {
             callback(undefined, 'Data error from server ');
           }
       });
-
-
   }
   public getArticlesList(conf: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'article/search/summary';
@@ -239,7 +237,7 @@ export class RequestService {
   }
   public getFireMessagesList(conf: string, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = '/msgitems';
-    this.db.list(urlStr).valueChanges().subscribe(
+    this.firebaseDB.list(urlStr).valueChanges().subscribe(
       (messages) => {
         if (messages) {
             callback(messages, undefined);
@@ -250,8 +248,6 @@ export class RequestService {
         callback(undefined, e);
       }
     );
-
-    // callback(undefined, error);
 
   }
   private urlEncode(str: string): string {

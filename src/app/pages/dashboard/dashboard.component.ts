@@ -130,7 +130,6 @@ export class DashboardComponent {
         console.log(error);
       }
       if (data) {
-        console.log(data);
         this.fireMessages = data;
       }else {
         this.fireMessages = <any>[];
