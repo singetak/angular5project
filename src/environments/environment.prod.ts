@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
   serverURL: 'http://infoiuse.com/api/v1/',
+  userName: '',
+  password: '',
   firebase: {
     apiKey: "AIzaSyCY_46nikDgEitoyeyVWT-6sViwnBWg5oM",
     authDomain: "itechuse-13595.firebaseapp.com",

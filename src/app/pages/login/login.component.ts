@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from 'app/service/request.service';
 import { urlSafeBase64Encoding } from 'app/helpers';
+import { environment } from 'app/../environments/environment';
 
 @Component({
   selector: 'login',
@@ -12,8 +13,8 @@ export class LoginComponent {
   private subscriptions: any[] = <any>[];
   public title = 'Login Page';
   public errorMessage: string = '';
-  public loginPassword: string = '123456';
-  public emailPassword: string = 'admin@store.com';
+  public loginPassword: string = environment.password;
+  public emailPassword: string = environment.userName;
   public saveUsername: boolean = true;
   public loading: boolean = false;
   constructor(private router: Router, private requestService: RequestService) {
