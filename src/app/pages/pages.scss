@@ -9,11 +9,32 @@ alert {
 .clear{
   clear: both;
 }
-
-h1,h2,h3,h4,p,span{
+a{
+  color:$default-link;
+}
+a:hover{
+  color:$default-link-hover;
+  text-decoration: none;
+}
+h1,h2,h3,h4,p{
   color:$secondary-text;
 }
 
+i.fa-default{
+  color:$default-text;
+}
+button.close{
+  cursor: pointer;
+}
+.btn-primary{
+  background-color: $default-text;
+  border-color:$default-text;
+  cursor: pointer;
+}
+.btn-primary:hover{
+  background-color: $default-text;
+  border-color:$default-text;
+}
 /* End Common*/
 
 
@@ -21,15 +42,17 @@ h1,h2,h3,h4,p,span{
   /* Header */
   .head-top{
     margin:10px 0px;
-    .infoIuse{
-      float: left;
-      height: 40px;
-    }
     h2{
       float: left;
       font-weight: bold;
       color:$default-text;
-      margin:0px 5px
+      margin:0px 5px;
+      cursor: pointer;
+      .infoIuse{
+        float: left;
+        height: 40px;
+        margin: 0px 5px 0px 5px;
+      }
     }
     .menu-top{
       float:right;
@@ -37,6 +60,7 @@ h1,h2,h3,h4,p,span{
     .btn-primary{
       background-color: $default-text;
       border-color:$default-text;
+      cursor: pointer;
     }
     .btn-primary:hover{
       background-color: $default-text;

@@ -82,30 +82,34 @@ export class DashboardComponent {
     }
   }
   public deleteUser(userId) {
-    this.userloading = true;
-    this.requestService.deleteUser(userId, (data, error) => {
-      if (error) {
-        console.log(error);
-      }
-      if (data) {
-        this.loadUsersData();
-      }else {
-        this.userloading = false;
-      }
-    });
+    if (window.confirm('Are you sure you want to delete user?')) {
+      this.userloading = true;
+      this.requestService.deleteUser(userId, (data, error) => {
+        if (error) {
+          console.log(error);
+        }
+        if (data) {
+          this.loadUsersData();
+        }else {
+          this.userloading = false;
+        }
+      });
+    }
   }
   public deleteArticle(articleId) {
-    this.articleloading = true;
-    this.requestService.deleteArticle(articleId, (data, error) => {
-      if (error) {
-        console.log(error);
-      }
-      if (data) {
-        this.loadArticlesData();
-      }else {
-        this.articleloading = false;
-      }
-    });
+    if (window.confirm('Are you sure you want to delete article?')) {
+      this.articleloading = true;
+      this.requestService.deleteArticle(articleId, (data, error) => {
+        if (error) {
+          console.log(error);
+        }
+        if (data) {
+          this.loadArticlesData();
+        }else {
+          this.articleloading = false;
+        }
+      });
+    }
   }
   public openData(type, dataId) {
     if (type === 'article') {

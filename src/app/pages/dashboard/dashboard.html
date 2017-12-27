@@ -21,33 +21,33 @@
 <div class="row">
   <div class="col">
     <div class="card bg-light mb-3" style="max-width: 20rem;">
-      <div class="card-header">Articles <i class="fa fa-plus-circle actionIcon" *ngIf="requestService.validUser()" aria-hidden="true" (click)="addData('article')"></i></div>
+      <div class="card-header">Articles <i class="fa fa-plus-circle fa-default actionIcon" *ngIf="requestService.validUser()" aria-hidden="true" (click)="addData('article')"></i></div>
       <div class="card-body">
         <img *ngIf="articleloading"   src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         <ul class="list-group" *ngIf="!articleloading">
-          <li class="list-group-item" *ngFor="let article of articlesList">{{article.name}}  <i class="fa fa-minus-circle actionIcon" aria-hidden="true" (click)="deleteArticle(article.uid)" *ngIf="requestService.validUser()"></i><i class="fa fa-info-circle actionIcon" aria-hidden="true" (click)="openData('article',article.uid)"></i></li>
+          <li class="list-group-item" *ngFor="let article of articlesList">{{article.name}}  <i class="fa fa-minus-circle fa-default actionIcon" aria-hidden="true" (click)="deleteArticle(article.uid)" *ngIf="requestService.validUser()"></i><i class="fa fa-info-circle fa-default actionIcon" aria-hidden="true" (click)="openData('article',article.uid)"></i></li>
         </ul>
       </div>
     </div>
   </div>
   <div class="col">
     <div class="card bg-light mb-3" style="max-width: 20rem;">
-      <div class="card-header">User Articles <i class="fa fa-plus-circle actionIcon" aria-hidden="true" (click)="addData('article')"></i></div>
+      <div class="card-header">User Articles <i class="fa fa-plus-circle fa-default actionIcon" aria-hidden="true" (click)="addData('article')"></i></div>
       <div class="card-body">
         <img *ngIf="userArticleloading"   src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         <ul class="list-group" *ngIf="!userArticleloading">
-          <li class="list-group-item" *ngFor="let article of userArticlesList">{{article.name}}  <i class="fa fa-minus-circle actionIcon" aria-hidden="true" (click)="deleteArticle(article.uid)"></i><i class="fa fa-info-circle actionIcon" aria-hidden="true" (click)="openData('article',article.uid)"></i></li>
+          <li class="list-group-item" *ngFor="let article of userArticlesList">{{article.name}}  <i class="fa fa-minus-circle fa-default actionIcon" aria-hidden="true" (click)="deleteArticle(article.uid)"></i><i class="fa fa-info-circle fa-default actionIcon" aria-hidden="true" (click)="openData('article',article.uid)"></i></li>
         </ul>
       </div>
     </div>
   </div>
   <div class="col" *ngIf="requestService.validUser()">
     <div class="card bg-light mb-3" style="max-width: 20rem;">
-      <div class="card-header">Users <i class="fa fa-plus-circle actionIcon" *ngIf="requestService.validUser()" aria-hidden="true" (click)="addData('user')"></i></div>
+      <div class="card-header">Users <i class="fa fa-plus-circle fa-default actionIcon" *ngIf="requestService.validUser()" aria-hidden="true" (click)="addData('user')"></i></div>
       <div class="card-body">
         <img *ngIf="userloading"   src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         <ul class="list-group" *ngIf="!userloading">
-          <li class="list-group-item" *ngFor="let user of usersList">{{user.name}}  <i class="fa fa-minus-circle actionIcon" aria-hidden="true" (click)="deleteUser(user.uid)" *ngIf="requestService.validUser()"></i><i class="fa fa-info-circle actionIcon" aria-hidden="true" (click)="openData('user',user.uid)"></i></li>
+          <li class="list-group-item" *ngFor="let user of usersList">{{user.name}}  <i class="fa fa-minus-circle fa-default actionIcon" aria-hidden="true" (click)="deleteUser(user.uid)" *ngIf="requestService.validUser()"></i><i class="fa fa-info-circle fa-default actionIcon" aria-hidden="true" (click)="openData('user',user.uid)"></i></li>
         </ul>
       </div>
     </div>
