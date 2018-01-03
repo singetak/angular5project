@@ -53,4 +53,7 @@ export class HomeComponent {
       this.fireloading = false;
     });
   }
+  public openArticle(articleId) {
+    console.log('openArticle', articleId);
+  }
 }
