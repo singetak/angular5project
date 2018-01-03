@@ -1,22 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <alert></alert>
-<div class="container-fluid">
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
   <div class="head-top">
     <h2 class="title" [routerLink]="['/']"><img src="assets/logo.png" class="infoIuse"/>Info I Use</h2>
     <div class="btn-group menu-top" dropdown>
       <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
         <i class="fa fa-bars" aria-hidden="true"></i> <span class="caret"></span>
       </button>
-      <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
         <li role="menuitem"><a class="dropdown-item" [routerLink]="['/login']">Login</a></li>
         <li role="menuitem"><a class="dropdown-item" [routerLink]="['/']">Home</a></li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/pages/dashboard']">Admin</a></li>
         <li class="divider dropdown-divider"></li>
         <li role="menuitem"><a class="dropdown-item" href="#" (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>
   </div>
-</div>
+</nav>
 <div class="container clear">
     <router-outlet></router-outlet>
 </div>

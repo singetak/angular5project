@@ -38,12 +38,12 @@ button.close{
 /* End Common*/
 
 
-.container-fluid{
+.navbar{
   /* Header */
   .head-top{
-    margin:10px 0px;
+    width: 100%;
     h2{
-      float: left;
+      float: right;
       font-weight: bold;
       color:$default-text;
       margin:0px 5px;
@@ -55,7 +55,7 @@ button.close{
       }
     }
     .menu-top{
-      float:right;
+      float:left;
     }
     .btn-primary{
       background-color: $default-text;
@@ -67,7 +67,8 @@ button.close{
       border-color:$default-text;
     }
   }
-
+}
+.container-fluid{
   /* footer */
   .al-footer {
     height: 34px;

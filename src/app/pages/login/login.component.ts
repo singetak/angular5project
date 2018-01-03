@@ -7,7 +7,7 @@ import { environment } from 'app/../environments/environment';
 @Component({
   selector: 'login',
   templateUrl: './login.html',
-  // styleUrls: ['./app.component.css']
+  // styleUrls: ['../../app.component.scss']
 })
 export class LoginComponent {
   private subscriptions: any[] = <any>[];
@@ -35,7 +35,7 @@ export class LoginComponent {
       if (data) {
         localStorage.setItem('currentUser', JSON.stringify(data));
         this.requestService.currentUser = data;
-        this.router.navigate(['/']);
+        this.router.navigate(['/pages/dashboard']);
       }else {
         localStorage.removeItem('currentUser');
         this.requestService.currentUser = undefined;

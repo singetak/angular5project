@@ -39,6 +39,13 @@ export class RequestService {
       return false;
     }
   }
+  public loggedIn() {
+    if (this.currentUser) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   public getUserId() {
     if (this.currentUser && this.currentUser.hasOwnProperty('uid')) {
       return this.currentUser['uid'];
