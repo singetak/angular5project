@@ -1,5 +1,3 @@
-<article-modal [selectedArticle]="selectedArticle" [statusOpen]="openArticleModal" (onClose)="closeModal($event)"></article-modal>
-<user-modal [selectedUser]="selectedUser" [statusOpen]="openUserModal" (onClose)="closeModal($event)"></user-modal>
 <div class="row">
   <h1>
     {{ title }}!
@@ -20,34 +18,13 @@
 </div>
 <div class="row">
   <div class="col col-lg-4">
-    <circle-progress
-      [percent]="percentComplete1"
-      [radius]="100"
-      [outerStrokeWidth]="16"
-      [innerStrokeWidth]="8"
-      [animation]="true"
-      [animationDuration]="300"
-  ></circle-progress>
+    <progressbar class="progress" [value]="percentComplete1" [max]="100">{{percentComplete1}}%</progressbar>
   </div>
   <div class="col col-lg-4">
-    <circle-progress
-      [percent]="percentComplete2"
-      [radius]="100"
-      [outerStrokeWidth]="16"
-      [innerStrokeWidth]="8"
-      [animation]="true"
-      [animationDuration]="300"
-  ></circle-progress>
+    <progressbar class="progress progress-striped" [value]="percentComplete2" [max]="100" type="warning">{{percentComplete2}}%</progressbar>
   </div>
   <div class="col col-lg-4">
-    <circle-progress
-      [percent]="percentComplete3"
-      [radius]="100"
-      [outerStrokeWidth]="16"
-      [innerStrokeWidth]="8"
-      [animation]="true"
-      [animationDuration]="300"
-  ></circle-progress>
+    <progressbar class="progress progress-striped active" [max]="100" [value]="percentComplete3" type="danger"><i>{{percentComplete3}}%</i></progressbar>
   </div>
 </div>
 <div class="row">

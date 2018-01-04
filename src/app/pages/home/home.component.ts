@@ -15,7 +15,7 @@ export class HomeComponent {
   public articleloading: boolean = false;
   public fireMessages: any[] | undefined = undefined;
   public fireloading: boolean = false;
-  public percentComplete1 = 15;
+  public percentComplete1 = 25;
   public percentComplete2 = 45;
   public percentComplete3 = 80;
   constructor(public requestService: RequestService, private alertService: AlertService) {

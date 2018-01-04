@@ -27,7 +27,6 @@
     "firebase": "4.8.0",
     "font-awesome": "^4.7.0",
     "jquery": "^1.9.1",
-    "ng-circle-progress": "^0.9.8",
     "ngx-bootstrap": "^2.0.0-beta.9",
     "popper.js": "^1.12.9",
     "rxjs": "^5.5.2",
