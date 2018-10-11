@@ -12,6 +12,7 @@ import { FiremsgComponent } from './common/firemsg';
 import { UserModal } from './dashboard/components/userModal';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { DummyComponent } from './dummy/dummy.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,6 +26,7 @@ import { HomeComponent } from './home/home.component';
     PagesComponent,
     DashboardComponent,
     HomeComponent,
+    DummyComponent,
     AlertComponent,
     ArticleModal,
     FiremsgComponent,

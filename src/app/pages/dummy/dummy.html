@@ -1,0 +1,26 @@
+<div class="row">
+  <h1>
+    {{ title }}!
+  </h1>
+</div>
+<div class="row">
+  <div class="col">
+    <hr>
+    <div class="alert alert-danger" role="alert" *ngIf="message !== ''">
+     {{message}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <hr>
+    <div class="card bg-light mb-3" *ngIf="dataObject">
+      <div class="card-header">Services</div>
+      <div class="card-body">
+        <ul class="list-group" *ngIf="!loading">
+          <li class="list-group-item" *ngFor="let service of dataObject.data">{{article.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
