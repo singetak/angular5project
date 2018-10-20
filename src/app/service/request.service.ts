@@ -95,23 +95,6 @@ export class RequestService {
     let base64 = btoa(stringToSign);
     return base64;
   }
-  public getServicessList(conf: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
-    let urlStr = 'http://db2.ess-maximosupport.com:80/maxdemo/oslc/os/xx_mob_sr?lean=1&collectioncount=1&oslc.select=ticketid%2Cassetnum%2Cstatus%2Cdescription%2Cdescription_longdescription%2Clocation%2Cclassstructureid%2Corgid%2Creportdate%2Caffectedperson%2Caffectedphone%2Caffectedemail&oslc.where=class=%22SR%22%20and%20affectedphone=%2296170817050%22%20and%20historyflag=0&oslc.orderBy=-reportdate&oslc.pageSize=30';
-    let encodePass = this.toBase64("maxadmin:maxadmin");
-    // let headerLogin = {name: 'Authorization',value: 'BASIC ' + encodePass}
-    let headerLogin = {name: 'maxauth', value: encodePass};
-    this.jsonRequestIBM(urlStr, (jsonObj, error) => {
-        if (error !== undefined) {
-            callback(undefined, error);
-            return;
-        }
-        if (jsonObj) {
-          callback(jsonObj, undefined);
-        } else {
-            callback(undefined, error);
-        }
-    }, RequestMethod.Get, undefined, headerLogin);
-  }
   public getArticlesList(conf: any, callback: (dataResponse: any | undefined, requestError: any | undefined) => void, lang?: string) {
     let urlStr = this.authURL + 'article/search/summary';
     urlStr = this.addLanguageToURL(urlStr, lang);
@@ -327,60 +310,6 @@ export class RequestService {
             headers.append('X-Token', this.token);
         }
         let options = new RequestOptions({ headers: headers });
-        let bodyString = postBody;
-        if (method === RequestMethod.Post) {
-           bodyString = JSON.stringify(postBody);
-           options.body = bodyString;
-        }
-        let request = new Request({method: method, url: url, body: bodyString, headers: headers});
-        this.http.request(request, options)
-                          .map((res: Response) => {
-                            if (res.status >= 400) {
-                              callback(undefined, 'server');
-                              return;
-                            }
-                            return res.json();
-                          })
-                          .subscribe(
-                            (data) => {
-                              callback(data, undefined);
-                              // console.log(url, data);
-                            },
-                            (err) => {
-                              if (retry) {
-                                  let timeInterval = Math.min(maxTimeout, retryFactor * timeout);
-                                  this.jsonRequest(urlString, callback, method, postBody, contentType, timeInterval,
-                                     true, retryFactor, maxTimeout );
-                              } else {
-                                  callback(undefined, err);
-                              }
-                            });
-
-      } else {
-        // this.logger.log('Failed to create URL');
-        console.log('Failed to create URL');
-      }
-  }
-  private jsonRequestIBM(urlString: string,
-                      callback: (json: any, error: any) => void,
-                      method: RequestMethod = RequestMethod.Get,
-                      postBody: any = undefined,
-                      headerBody: any = undefined,
-                      contentType: string = ContentType.JSON,
-                      timeout: number = 10.0,
-                      retry: boolean = false,
-                      retryFactor: number = 1.5,
-                      maxTimeout: number = 60.0) {
-      if ( urlString ) {
-        let url: string = urlString || '';
-        // this.logger.log(url, method, postBody, contentType, timeout, retry, retryFactor, maxTimeout);
-        // console.log(url, method, postBody, contentType, timeout, retry, retryFactor, maxTimeout);
-        let headers = new Headers();
-        if (headerBody) {
-          headers.append(headerBody.name, headerBody.value );
-        }
-        let options = new RequestOptions({ headers: headers });
-        console.log('options', options);
         let bodyString = postBody;
         if (method === RequestMethod.Post) {
            bodyString = JSON.stringify(postBody);
