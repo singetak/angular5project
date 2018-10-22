@@ -18,18 +18,18 @@ export class DummyComponent {
     this.loadData();
   }
   private loadData() {
-    this.loading = true;
-    this.requestService.getServicessList({term: ''}, (data, error) => {
-      if (error) {
-        console.log(error);
-      }
-      if (data) {
-        this.dataObject = data;
-      }else {
-        this.dataObject = undefined;
-      }
-      this.loading = false;
-    });
+    // this.loading = true;
+    // this.requestService.getServicessList({term: ''}, (data, error) => {
+    //   if (error) {
+    //     console.log(error);
+    //   }
+    //   if (data) {
+    //     this.dataObject = data;
+    //   }else {
+    //     this.dataObject = undefined;
+    //   }
+    //   this.loading = false;
+    // });
   }
   public openArticle(articleId) {
     console.log('openArticle', articleId);

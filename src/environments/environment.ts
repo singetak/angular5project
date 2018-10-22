@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  serverURL: 'http://infoiuse.com/api/v1/',
+  serverURL: 'http://localhost:8001/v1/',
   userName: 'admin@store.com',
   password: '123456',
   firebase: {
